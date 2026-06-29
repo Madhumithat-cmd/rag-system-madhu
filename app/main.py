@@ -24,7 +24,11 @@ app.include_router(upload_router)
 
 app.include_router(chat_router)
 
-STATIC_DIRECTORY = Path(__file__).parent / "static"
+ROOT_DIRECTORY = Path(__file__).resolve().parent.parent
+STATIC_DIRECTORY = ROOT_DIRECTORY / "public"
+
+if not STATIC_DIRECTORY.exists():
+    STATIC_DIRECTORY = ROOT_DIRECTORY / "static"
 
 app.mount(
     "/static",
